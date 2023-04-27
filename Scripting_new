@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# MonetDB connection details
+host="localhost"
+port=50000
+username="your-username"
+password="your-password"
+database="your-database"
+
+# SQL queries to execute
+queries=(
+  "SELECT * FROM your_table WHERE column = 'value';"
+  "UPDATE your_table SET column = 'new_value' WHERE id = 123;"
+  "DELETE FROM your_table WHERE date < '2022-01-01';"
+)
+
+# Connect to MonetDB and execute queries
+mclient -h "$host" -p "$port" -u "$username" -d "$database" <<EOF
+  ${password}
+  $(IFS=$'\n'; echo "${queries[*]}")
+EOF
